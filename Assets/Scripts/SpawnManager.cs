@@ -13,21 +13,25 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     float timeBetweenSpawn = 3.0F;
 
-    float currentTime;
+    float _currentTime;
+
+    float _speedMultiplier;
     private void Start()
     {
-        currentTime = timeBetweenSpawn;
+        _currentTime = timeBetweenSpawn;
     }
     void Update()
     {
         // Incrementa el tiempo por cada frame
-        currentTime += Time.deltaTime;
+        _currentTime += Time.deltaTime;
+
+        _speedMultiplier += Time.deltaTime * 0.1F;
 
         //Si el tiempo es igual o mayor al tiempo entre objetos por aparecer
-        if (currentTime >= timeBetweenSpawn)
+        if (_currentTime >= timeBetweenSpawn)
         {
             //Resetea el tiempo
-            currentTime = 0.0F;
+            _currentTime = 0.0F;
 
             //Asigna aleatoreamente un nuevo objeto para ahcerlo aparecer
             int spawningIndex = Random.Range(0, spawningObjects.Length);
@@ -50,5 +54,11 @@ public class SpawnManager : MonoBehaviour
 
 
         }
+
+
+    }
+    public float GetSpeedMultiplier()
+    {
+        return _speedMultiplier;
     }
 }
