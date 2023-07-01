@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -142,5 +143,4 @@ public class Character2DController : MonoBehaviour
             _lastTimeJumpPressed = Time.time;
         }
     }
-
 }

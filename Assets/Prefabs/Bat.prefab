@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1778776919639000889}
   - component: {fileID: 5015649686788199391}
   - component: {fileID: 4931022909636977831}
+  - component: {fileID: -1193425186108092582}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Enemy
@@ -97,7 +98,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0101828175, y: -0.3467224}
@@ -122,7 +123,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &4931022909636977831
 MonoBehaviour:
@@ -138,3 +139,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   spawingPoints: 02000000
+--- !u!114 &-1193425186108092582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286914823924368368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cc252da0fe56741812a7877e88d95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
