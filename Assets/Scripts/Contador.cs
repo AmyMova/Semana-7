@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Contador : MonoBehaviour
+[Serializable]
+public class Contador
 {
     public int contador { get; private set; }
 

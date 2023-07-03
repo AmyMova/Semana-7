@@ -14,8 +14,7 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.CompareTag(playerTag))
         {
             //ACA SE REDIRIJE A LA ESCENA DE GAME OVER
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("GAME OVER"); //Este texto aparece abajo a la izquierda :D
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
