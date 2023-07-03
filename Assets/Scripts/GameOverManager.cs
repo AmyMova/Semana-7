@@ -24,7 +24,7 @@ public class GameOverManager : MonoBehaviour
         if(actualPuntaje > logro) {
             PlayerPrefs.SetInt("Logros", actualPuntaje);
         }
-
+        Time.timeScale = 0.0F;
         actual.text = actualPuntaje.ToString();
         record.text = logro.ToString();
     }
