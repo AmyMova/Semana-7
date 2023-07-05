@@ -151,3 +151,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29cc252da0fe56741812a7877e88d95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 4308930325033082278, guid: b7d47a552b3e833469eb361f59053aee, type: 3}

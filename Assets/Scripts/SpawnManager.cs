@@ -1,81 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Singleton<SpawnManager>
 {
-    public static SpawnManager _instance { get; private set; }
-    static readonly object _syncLock = new object();
-
-    [Header("Enemigos")]
 
     [SerializeField]
-    Transform[] spawningEnemies;
+    Transform[] spawningObjects;
 
     [SerializeField]
-    float timeBetweenSpawnEnemies = 3.0F;
-
-    [Header("Plataformas")]
-
-    [SerializeField]
-    Transform[] spawningPlatforms;
-
-    [SerializeField]
-    float timeBetweenSpawnPlatforms = 3.0F;
-
-    [Header("Otros")]
+    float timeBetweenSpawn = 3.0F;
 
     [SerializeField]
     Transform[] spawningPoints;
 
-    float _currentTime, _currentTime2;
+    float _currentTime;
 
     float _speedMultiplier;
 
-    //Singleton
-    void Awake()
-    {
-        bool destroyCurrentInstance = true;
-        if (_instance == null)
-        {
-            lock (_syncLock)
-            {
-                if (_instance == null)
-                {
-                    _instance = this;
-                    DontDestroyOnLoad(gameObject);
-                    destroyCurrentInstance = false;
-                }
-            }
-        }
-        if (destroyCurrentInstance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
+    bool _isSpawning;
 
-    private void Start()
+
+
+    void Start()
     {
-        _currentTime = timeBetweenSpawnPlatforms;
-        _currentTime2 = timeBetweenSpawnEnemies;
+        _currentTime = timeBetweenSpawn;
+
     }
     public void Update()
     {
+        if (!_isSpawning)
+        {
+            return;
+        }
+
         // Incrementa el tiempo por cada frame
         _currentTime += Time.deltaTime;
-        _currentTime2 += Time.deltaTime;
+
         _speedMultiplier += Time.deltaTime * 0.1F;
 
         //Si el tiempo es igual o mayor al tiempo entre objetos por aparecer
-        if (_currentTime >= timeBetweenSpawnPlatforms)
+        if (_currentTime >= timeBetweenSpawn)
         {
             //Resetea el tiempo
             _currentTime = 0.0F;
 
             //Asigna aleatoreamente un nuevo objeto para ahcerlo aparecer
-            int spawningIndex = Random.Range(0, spawningPlatforms.Length);
-            Transform prefab = spawningPlatforms[spawningIndex];
+            int spawningIndex = Random.Range(0, spawningObjects.Length);
+            Transform prefab = spawningObjects[spawningIndex];
 
             //Asigna la posicion en la que puede aparecer
             SpawingObjectController controller = prefab.GetComponent<SpawingObjectController>();
@@ -92,34 +65,14 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
-        if (_currentTime2 >= timeBetweenSpawnEnemies)
-        {
-            //Resetea el tiempo
-            _currentTime2 = 0.0F;
-
-            //Asigna aleatoreamente un nuevo objeto para ahcerlo aparecer
-            int spawningIndex = Random.Range(0, spawningEnemies.Length);
-            Transform prefab = spawningEnemies[spawningIndex];
-
-            //Asigna la posicion en la que puede aparecer
-            SpawingObjectController controller = prefab.GetComponent<SpawingObjectController>();
-            int[] spawningPoints = controller.GetSpawningPoints();
-            spawningIndex = spawningPoints[Random.Range(0, spawningPoints.Length)];
-            //Crea la instancias del prefab
-
-            foreach (Transform point in this.spawningPoints)
-            {
-                if (point.gameObject.name.Equals("Point " + spawningIndex.ToString()))
-                {
-                    Instantiate(prefab, point.position, Quaternion.identity);
-                    break;
-                }
-            }
-        }
-
     }
     public float GetSpeedMultiplier()
     {
         return _speedMultiplier;
+    }
+    public void SetIsSpawning(bool isSpawning)
+    {
+        _speedMultiplier = 0.8F;
+        _isSpawning = isSpawning;
     }
 }

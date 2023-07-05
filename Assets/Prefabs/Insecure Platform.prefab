@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2186946620926207651}
   - component: {fileID: 4638436237104855850}
   - component: {fileID: 4584633453578421197}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Insecure Platform
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  spawingPoints: 04000000
+  spawingPoints: 02000000
 --- !u!61 &4638436237104855850
 BoxCollider2D:
   m_ObjectHideFlags: 0

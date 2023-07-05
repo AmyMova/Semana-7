@@ -5,20 +5,19 @@ using UnityEngine;
 
 public class EdgeController : MonoBehaviour
 {
-    SessionManager _sessionManager;
+    GameManager _gameManager;
     public int contador = 0;
 
-    private void Awake() {
-        _sessionManager = SessionManager.Instance;
-        _sessionManager.contador.Resetear();
+    private void Start()
+    {
+        _gameManager=FindObjectOfType<GameManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy")|| other.CompareTag("Platform"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Platform"))
         {
-            _sessionManager.contador.Incrementar();
-            Debug.Log(_sessionManager.contador.contador);
+            _gameManager.IncreaseEnemiesKilled();
             Destroy(other.gameObject);
         }
     }

@@ -12,16 +12,22 @@ public class SpawingObjectController : MonoBehaviour
 
     Rigidbody2D _rb;
 
+    SpawnManager _spawnManager;
+
+    float _speedMultiplier;
+
 
     void Start()
     {
-        SpawnManager._instance.Update();
-        
+        _spawnManager = SpawnManager.Instance;
+
         _rb = GetComponent<Rigidbody2D>();
+
+        _speedMultiplier = _spawnManager.GetSpeedMultiplier();
     }
     void FixedUpdate()
     {
-        _rb.velocity = Vector2.left * speed * Time.fixedDeltaTime * SpawnManager._instance.GetSpeedMultiplier();
+        _rb.velocity = Vector2.left * speed * Time.fixedDeltaTime * _speedMultiplier;
     }
     public int[] GetSpawningPoints()
     {
